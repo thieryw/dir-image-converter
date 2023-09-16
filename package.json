@@ -1,6 +1,6 @@
 {
     "name": "dir-image-converter",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "A module that resizes images in a dir arborecence.",
     "repository": {
         "type": "git",
@@ -19,11 +19,11 @@
         "format:check": "npm run _format -- --list-different",
         "link-in-app": "ts-node --skipProject scripts/link-in-app.ts"
     },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/bin/index.js",
+    "types": "dist/bin/index.d.ts",
     "exports": {
-        ".": "./dist/index.js",
-        "./*": "./dist/*.js",
+        ".": "./dist/bin/index.js",
+        "./*": "./dist/bin/*.js",
         "./tools": "./dist/tools/index.js"
     },
     "lint-staged": {
@@ -47,7 +47,7 @@
         "!dist/tsconfig.tsbuildinfo"
     ],
     "keywords": [],
-    "homepage": "https://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#",
+    "homepage": "https://github.com/thieryw/dir-image-converter",
     "dependencies": {
         "sharp": "^0.32.5",
         "yargs": "^17.7.2"
