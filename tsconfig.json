@@ -20,5 +20,5 @@
         "skipLibCheck": true
     },
     "include": ["src"],
-    "exclude": ["src/**/*.deno.ts", "src/**/*.deno.tsx"]
+    "exclude": ["node_modules", "dist/**/*"]
 }

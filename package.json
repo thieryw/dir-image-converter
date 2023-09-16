@@ -1,10 +1,13 @@
 {
-    "name": "#{REPO_NAME}#",
+    "name": "dir-image-converter",
     "version": "0.0.0",
-    "description": "#{DESC}#",
+    "description": "A module that resizes images in a dir arborecence.",
     "repository": {
         "type": "git",
-        "url": "git://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#.git"
+        "url": "git://github.com/thieryw/dir-image-converter.git"
+    },
+    "bin": {
+        "resize-images": "./dist/main.js"
     },
     "scripts": {
         "build": "tsc",
@@ -45,6 +48,10 @@
     ],
     "keywords": [],
     "homepage": "https://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#",
+    "dependencies": {
+        "sharp": "^0.32.5",
+        "yargs": "^17.7.2"
+    },
     "devDependencies": {
         "@types/node": "^20.2.1",
         "typescript": "^5.0.4",
@@ -57,8 +64,7 @@
         "prettier": "^2.8.8",
         "vitest": "^0.31.1",
         "ts-node": "^10.9.1",
-        "react": "^18.2.0",
-        "@types/react": "^18.2.6"
+        "@types/sharp": "^0.32.0"
     },
     "publishConfig": {
         "access": "public"
