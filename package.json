@@ -1,13 +1,13 @@
 {
     "name": "dir-image-converter",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A module that resizes images in a dir arborecence.",
     "repository": {
         "type": "git",
         "url": "git://github.com/thieryw/dir-image-converter.git"
     },
     "bin": {
-        "resize-images": "./dist/main.js"
+        "resize-images": "./dist/bin/main.js"
     },
     "scripts": {
         "build": "tsc",
