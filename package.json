@@ -1,6 +1,6 @@
 {
     "name": "dir-image-converter",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "A module that resizes images in a dir arborecence.",
     "repository": {
         "type": "git",
