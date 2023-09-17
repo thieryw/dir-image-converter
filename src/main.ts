@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { generateResizedImages } from "./imageConverter/generateResizedImages";
 import { join } from "path";
 import yargs from "yargs";
