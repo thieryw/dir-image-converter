@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { generateResizedImages } from "./imageConverter/generateResizedImages";
-import { join } from "path";
 import yargs from "yargs";
 
 const argv = yargs
@@ -45,8 +44,8 @@ const argv = yargs
         };
     });
     await generateResizedImages({
-        "pathToAssets": join(__dirname, args.assets),
-        "pathToConvertedImages": join(__dirname, args.output),
+        "pathToAssets": args.assets,
+        "pathToConvertedImages": args.output,
         "overrideExisting": args.overide ?? false,
         "outputSizes": parsedSizes
     });
