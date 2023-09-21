@@ -32,20 +32,22 @@ export async function generateResizedImagesFolder(params: {
         }
 
         const splitPath = path.split(sep);
-        const imagefolderName = splitPath[splitPath.length - 1];
+        const imageFolderName = splitPath[splitPath.length - 1];
 
         splitPath.pop();
 
         splitPath.push(
             (() => {
                 const unSplitPath = splitPath.join(sep);
-                const copies = readdirSync(unSplitPath).filter(file => file.includes(imagefolderName));
-                const newName = `${imagefolderName}(${copies.length})`;
+                const copies = readdirSync(unSplitPath.length === 0 ? "." : unSplitPath).filter(file =>
+                    file.includes(imageFolderName)
+                );
+                const newName = `${imageFolderName}(${copies.length})`;
 
                 if (existsSync(join(unSplitPath, newName))) {
                     return `${newName}(${copies.length})`;
                 }
-                return `${imagefolderName}(${copies.length})`;
+                return `${imageFolderName}(${copies.length})`;
             })()
         );
 
