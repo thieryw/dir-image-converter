@@ -1,9 +1,9 @@
 import { crawl } from "../crawl";
 import { mkdirSync, rmSync, existsSync, readdirSync } from "fs";
 import { resizeImages } from "./resizeImages";
-import { join } from "path";
+import { sep, join } from "path";
 
-export async function generateResizedImages(params: {
+export async function generateResizedImagesFolder(params: {
     pathToAssets: string;
     pathToConvertedImages: string;
     overrideExisting: boolean;
@@ -31,21 +31,25 @@ export async function generateResizedImages(params: {
             return;
         }
 
-        const newPath = path.substring(0, path.search(/\w+$/g));
-        const copies = readdirSync(newPath).filter(file => {
-            return file.search(/^convertedImage/g) !== -1;
-        });
+        const splitPath = path.split(sep);
+        const imagefolderName = splitPath[splitPath.length - 1];
 
-        path = join(
-            newPath,
-            `convertedImage(${(() => {
-                if (copies.length === 0) {
-                    return 0;
+        splitPath.pop();
+
+        splitPath.push(
+            (() => {
+                const unSplitPath = splitPath.join(sep);
+                const copies = readdirSync(unSplitPath).filter(file => file.includes(imagefolderName));
+                const newName = `${imagefolderName}(${copies.length})`;
+
+                if (existsSync(join(unSplitPath, newName))) {
+                    return `${newName}(${copies.length})`;
                 }
-
-                return copies.length;
-            })()})`
+                return `${imagefolderName}(${copies.length})`;
+            })()
         );
+
+        path = splitPath.join(sep);
 
         mkdirSync(path);
     })();

@@ -42,11 +42,11 @@ export async function resizeImages(params: {
                     .toFile(outPath);
             };
 
-            const nameComplement =
+            const sizeLabel =
                 outputSizes[0].sizeLabel === undefined ? "" : `${outputSizes[0].sizeLabel}_`;
 
             const fileName = parse(file).name;
-            const newImagePath = join(pathToConvertedImages, `${nameComplement}${file}` ?? file);
+            const newImagePath = join(pathToConvertedImages, `${sizeLabel}${file}` ?? file);
             if (outputSizes.length === 1) {
                 if (width >= height) {
                     await resize(
@@ -75,7 +75,7 @@ export async function resizeImages(params: {
                         fileName,
                         `${
                             newImageLengthAndName.sizeLabel === undefined
-                                ? ""
+                                ? `${newImageLengthAndName.length}px_`
                                 : `${newImageLengthAndName.sizeLabel}_`
                         }${file}` ?? `${fileName}_${newImageLengthAndName.length}${extname(file)}`
                     );

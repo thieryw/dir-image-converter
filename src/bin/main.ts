@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { generateResizedImages } from "./imageConverter/generateResizedImages";
+import { generateResizedImagesFolder } from "../lib/imageFunctions/generateResizedImagesFolder";
 import yargs from "yargs";
 
 const argv = yargs
@@ -40,10 +40,10 @@ const argv = yargs
         const [length, sizeLabel] = size.split(",");
         return {
             length: parseInt(length, 10),
-            sizeLabel
+            "sizeLabel": sizeLabel === "" ? undefined : sizeLabel
         };
     });
-    await generateResizedImages({
+    await generateResizedImagesFolder({
         "pathToAssets": args.assets,
         "pathToConvertedImages": args.output,
         "overrideExisting": args.overide ?? false,
