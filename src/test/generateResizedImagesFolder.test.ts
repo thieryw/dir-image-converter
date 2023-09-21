@@ -46,7 +46,7 @@ async function testDimensionsForImagesInFolder(folderPath: string) {
 
 }*/
 
-fs.mkdirSync(path.join(__dirname, "..", "assets", "generated"));
+fs.mkdirSync(path.join(__dirname, "..", "assets", "generated"), { "recursive": true });
 const inputPath = path.join(__dirname, "..", "assets", "img");
 const outputPath = path.join(__dirname, "..", "assets", "generated", "img-resized");
 
