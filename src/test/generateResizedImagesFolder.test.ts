@@ -46,6 +46,7 @@ async function testDimensionsForImagesInFolder(folderPath: string) {
 
 }*/
 
+fs.mkdirSync(path.join(__dirname, "..", "assets", "generated"));
 const inputPath = path.join(__dirname, "..", "assets", "img");
 const outputPath = path.join(__dirname, "..", "assets", "generated", "img-resized");
 
@@ -87,11 +88,7 @@ test("It should create a second copy of the resized image folder", async () => {
     expect(fs.existsSync(path.join(__dirname, "..", "assets", "generated", "img-resized(1)"))).toBe(
         true
     );
-    fs.rmSync(path.join(__dirname, "..", "assets", "generated", "img-resized"), {
-        "force": true,
-        "recursive": true
-    });
-    fs.rmSync(path.join(__dirname, "..", "assets", "generated", "img-resized(1)"), {
+    fs.rmSync(path.join(__dirname, "..", "assets", "generated"), {
         "force": true,
         "recursive": true
     });

@@ -42,4 +42,4 @@ jspm_packages
 
 /.yarn_home
 /dist
-/src/assets/generated/*
+/src/assets/generated
