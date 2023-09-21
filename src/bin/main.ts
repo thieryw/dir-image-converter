@@ -35,7 +35,9 @@ const argv = yargs
     const args = await argv;
     const parsedSizes = args.sizes.map(size => {
         if (typeof size === "number") {
-            throw new Error("Error! Invalide size argument!");
+            return {
+                "length": size
+            };
         }
         const [length, sizeLabel] = size.split(",");
         return {
