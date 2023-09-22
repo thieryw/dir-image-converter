@@ -1,9 +1,9 @@
 import sharp from "sharp";
-import { isImagePr } from "./isImage";
+import { isValidImage } from "./isValidImage";
 
 export async function compress(params: { path: string; outPath: string; quality: number }) {
     const { outPath, path, quality } = params;
-    const isImage = await isImagePr(path);
+    const isImage = await isValidImage(path);
     if (!isImage) {
         return;
     }

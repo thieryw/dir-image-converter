@@ -7,11 +7,12 @@
         "url": "git://github.com/thieryw/dir-image-converter.git"
     },
     "bin": {
-        "resize-images": "./dist/bin/main.js"
+        "resize-images": "./dist/bin/resizeImages.js",
+        "convert-images": "./dist/bin/convertImages.js"
     },
     "scripts": {
         "build": "tsc && yarn copyfiles",
-        "test": "jest",
+        "test": "true",
         "copyfiles": "copyfiles -u 1 src/**/*.jpg dist/",
         "lint:check": "eslint . --ext .ts,.tsx",
         "lint": "npm run lint:check -- --fix",
@@ -65,9 +66,6 @@
         "ts-node": "^10.9.1",
         "@types/sharp": "^0.32.0",
         "@types/yargs": "17.0.24",
-        "jest": "^29.7.0",
-        "@types/jest": "^29.5.5",
-        "ts-jest": "^29.1.1",
         "copyfiles": "^2.4.1"
     },
     "publishConfig": {

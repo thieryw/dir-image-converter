@@ -1,8 +1,8 @@
 import { join, extname, parse } from "path";
 import { mkdirSync } from "fs";
-import type { Tree } from "../crawl";
+import type { Tree } from "../tools/crawl";
 import sharp from "sharp";
-import { isImagePr } from "./isImage";
+import { isValidImage } from "./isValidImage";
 
 export async function resizeImages(params: {
     data: Tree;
@@ -18,7 +18,7 @@ export async function resizeImages(params: {
     for (const file of data.files) {
         await (async () => {
             const pathToAsset = join(pathToAssets, file);
-            const isImage = await isImagePr(pathToAsset);
+            const isImage = await isValidImage(pathToAsset);
 
             if (!isImage) {
                 return;

@@ -1,3 +1,2 @@
-export { generateResizedImagesFolder } from "./imageFunctions/generateResizedImagesFolder";
-export type { Tree } from "./crawl";
-export { crawl } from "./crawl";
+export { generateResizedImages } from "./generateResizedImages";
+export { generateConvertedImages } from "./generateConvertedImages";

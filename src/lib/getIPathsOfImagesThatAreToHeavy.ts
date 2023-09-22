@@ -1,5 +1,5 @@
 import fs from "fs";
-import { crawl } from "../crawl";
+import { crawl } from "../tools/crawl";
 import path from "path";
 
 function getImageSize(filePath: string) {

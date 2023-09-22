@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { generateResizedImagesFolder } from "../lib/imageFunctions/generateResizedImagesFolder";
+import { generateResizedImages } from "../lib/generateResizedImages";
 import yargs from "yargs";
 
 const argv = yargs
@@ -22,7 +22,7 @@ const argv = yargs
         "type": "array",
         "demandOption": true
     })
-    .option("overide", {
+    .option("override", {
         "alias": "ov",
         "description": "Override existing output folder",
         "type": "boolean",
@@ -45,10 +45,10 @@ const argv = yargs
             "sizeLabel": sizeLabel === "" ? undefined : sizeLabel
         };
     });
-    await generateResizedImagesFolder({
+    await generateResizedImages({
         "pathToAssets": args.assets,
         "pathToConvertedImages": args.output,
-        "overrideExisting": args.overide ?? false,
+        "overrideExisting": args.override ?? false,
         "outputSizes": parsedSizes
     });
 })();
