@@ -18,8 +18,7 @@ export async function convertImages(params: ConvertImagesParams) {
     for (const file of data.files) {
         const isImage = await isValidImage(join(pathToAssets, file));
         if (!isImage) {
-            console.log("ok");
-            return;
+            continue;
         }
         await sharp(join(pathToAssets, file))
             [convertTo]()
