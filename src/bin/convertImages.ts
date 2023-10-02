@@ -43,7 +43,7 @@ const argv = yargs
     await generateConvertedImages({
         "pathToAssets": args.assets,
         "pathToConvertedImages": args.output,
-        "convertTo": args.format as any,
+        "format": args.format as any,
         "overrideExisting": args.override ?? false
     });
 })();
