@@ -1,5 +1,5 @@
 import { readdirSync, statSync } from "fs";
-import { join } from "path";
+import { join, basename } from "path";
 
 export type Tree = {
     files: string[];
@@ -10,7 +10,12 @@ export function crawl(params: { path: string }): Tree {
     const { path } = params;
     const files: string[] = [];
     const directories: Tree["directories"] = {};
-
+    if (!statSync(path).isDirectory()) {
+        return {
+            "files": [basename(path)],
+            "directories": {}
+        };
+    }
     readdirSync(path).forEach(fileOrDir => {
         const completePath = join(path, fileOrDir);
 

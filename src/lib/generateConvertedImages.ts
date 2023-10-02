@@ -8,7 +8,7 @@ export async function generateConvertedImages(
         overrideExisting: boolean;
     }
 ) {
-    const { pathToAssets, pathToConvertedImages, convertTo, overrideExisting } = params;
+    const { pathToAssets, pathToConvertedImages, format, overrideExisting } = params;
 
     const data = crawl({
         "path": pathToAssets
@@ -23,6 +23,6 @@ export async function generateConvertedImages(
         data,
         pathToAssets,
         "pathToConvertedImages": path,
-        convertTo
+        format
     });
 }

@@ -1,5 +1,5 @@
 import { join } from "path";
-import { mkdirSync } from "fs";
+import { mkdirSync, statSync } from "fs";
 import type { Tree } from "../tools/crawl";
 import sharp from "sharp";
 import { isValidImage } from "./isValidImage";
@@ -9,20 +9,26 @@ export type ConvertImagesParams = {
     data: Tree;
     pathToAssets: string;
     pathToConvertedImages: string;
-    convertTo: ImageExtensions;
+    format: ImageExtensions;
 };
 
 export async function convertImages(params: ConvertImagesParams) {
-    const { data, pathToAssets, pathToConvertedImages, convertTo } = params;
+    const { data, pathToAssets, pathToConvertedImages, format } = params;
 
     for (const file of data.files) {
-        const isImage = await isValidImage(join(pathToAssets, file));
+        const pathToAsset = (() => {
+            if (!statSync(pathToAssets).isDirectory()) {
+                return pathToAssets;
+            }
+            return join(pathToAssets, file);
+        })();
+        const isImage = await isValidImage(pathToAsset);
         if (!isImage) {
             continue;
         }
-        await sharp(join(pathToAssets, file))
-            [convertTo]()
-            .toFile(join(pathToConvertedImages, `${file.replace(/.\w+$/g, "")}.${convertTo}`));
+        await sharp(join(pathToAsset))
+            [format]()
+            .toFile(join(pathToConvertedImages, `${file.replace(/.\w+$/g, "")}.${format}`));
     }
 
     if (Object.keys(data.directories).length === 0) {
@@ -38,7 +44,7 @@ export async function convertImages(params: ConvertImagesParams) {
             "data": value,
             "pathToAssets": newPath,
             "pathToConvertedImages": join(pathToConvertedImages, currentDirName),
-            convertTo
+            format
         });
         index++;
     }
