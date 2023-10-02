@@ -1,5 +1,7 @@
 import sharp from "sharp";
 import { isValidImage } from "./isValidImage";
+import { imageExtensions } from "../tools/imageExtensions";
+import type { ImageExtensions } from "../tools/imageExtensions";
 
 export async function compress(params: { path: string; outPath: string; quality: number }) {
     const { outPath, path, quality } = params;
@@ -8,23 +10,8 @@ export async function compress(params: { path: string; outPath: string; quality:
         return;
     }
     const format = (await sharp(path).metadata()).format;
-    switch (format) {
-        case "jpeg":
-            await sharp(path).jpeg({ quality }).toFile(outPath);
-            return;
-        case "jp2":
-            await sharp(path).jp2({ quality }).toFile(outPath);
-            return;
-        case "jxl":
-            await sharp(path).jxl({ quality }).toFile(outPath);
-            return;
-        case "png":
-            await sharp(path).png({ quality }).toFile(outPath);
-            return;
-        case "webp":
-            await sharp(path).webp({ quality }).toFile(outPath);
-            return;
-        default:
-            throw new Error("Incompatible image format");
+    if (format === undefined || !(imageExtensions as unknown as string[]).includes(format)) {
+        throw new Error("Error! Invalid format!");
     }
+    await sharp(path)[format as ImageExtensions]({ quality }).toFile(outPath);
 }
