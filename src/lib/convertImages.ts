@@ -2,7 +2,7 @@ import { join } from "path";
 import { mkdirSync, statSync } from "fs";
 import type { Tree } from "../tools/crawl";
 import sharp from "sharp";
-import { isValidImage } from "./isValidImage";
+import { isValidImage } from "../tools/isValidImage";
 import type { ImageExtensions } from "../tools/imageExtensions";
 
 export type ConvertImagesParams = {

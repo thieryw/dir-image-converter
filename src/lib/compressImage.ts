@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { isValidImage } from "./isValidImage";
+import { isValidImage } from "../tools/isValidImage";
 import { imageExtensions } from "../tools/imageExtensions";
 import type { ImageExtensions } from "../tools/imageExtensions";
 

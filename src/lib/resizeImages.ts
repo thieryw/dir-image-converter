@@ -2,7 +2,7 @@ import { join, extname, parse } from "path";
 import { mkdirSync, statSync } from "fs";
 import type { Tree } from "../tools/crawl";
 import sharp from "sharp";
-import { isValidImage } from "./isValidImage";
+import { isValidImage } from "../tools/isValidImage";
 
 export async function resizeImages(params: {
     data: Tree;
