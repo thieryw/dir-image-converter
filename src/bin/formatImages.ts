@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { generateResizedImages } from "../lib/generateResizedImages";
-import { generateConvertedImages } from "../lib/generateConvertedImages";
+import { generateFormatedImages } from "../lib/generateFormatedImages";
 import yargs from "yargs";
 import { imageExtensions } from "../tools/imageExtensions";
+import type { ImageExtensions } from "../tools/imageExtensions";
 
 const argv = yargs
     .option("assets", {
@@ -37,50 +37,47 @@ const argv = yargs
         "type": "boolean",
         "demandOption": false
     })
+    .option("quality", {
+        "alias": "q",
+        "description": "Quality. give a number between 0 and 100",
+        "type": "number",
+        "demandOption": false
+    })
     .help()
     .alias("help", "h").argv;
 
 (async () => {
     const args = await argv;
-    resize: {
-        if (args.sizes === undefined) {
-            break resize;
-        }
+    /*    if (args.sizes === undefined) {
+        return;
+    }*/
 
-        const parsedSizes = args.sizes.map(size => {
-            if (typeof size === "number") {
-                return {
-                    "length": size
-                };
+    const parsedSizes =
+        args.sizes === undefined
+            ? undefined
+            : args.sizes.map(size => {
+                  if (typeof size === "number") {
+                      return {
+                          "length": size
+                      };
+                  }
+                  const [length, sizeLabel] = size.split(",");
+                  return {
+                      length: parseInt(length, 10),
+                      "sizeLabel": sizeLabel === "" ? undefined : sizeLabel
+                  };
+              });
+    await generateFormatedImages({
+        "pathToAssets": args.assets,
+        "pathToConvertedImages": args.output,
+        "overrideExisting": args.override ?? false,
+        "outputSizes": parsedSizes,
+        "quality": args.quality,
+        "format": (() => {
+            if (!imageExtensions.includes(args.format as ImageExtensions)) {
+                throw new Error("Error! The format you have specified is not supported!");
             }
-            const [length, sizeLabel] = size.split(",");
-            return {
-                length: parseInt(length, 10),
-                "sizeLabel": sizeLabel === "" ? undefined : sizeLabel
-            };
-        });
-        await generateResizedImages({
-            "pathToAssets": args.assets,
-            "pathToConvertedImages": args.output,
-            "overrideExisting": args.override ?? false,
-            "outputSizes": parsedSizes
-        });
-    }
-
-    convert: {
-        if (args.format === undefined) {
-            break convert;
-        }
-
-        if (!imageExtensions.includes(args.format as any)) {
-            throw new Error(`Error! The format you have specified is not supported!`);
-        }
-
-        await generateConvertedImages({
-            "pathToAssets": args.assets,
-            "pathToConvertedImages": args.output,
-            "format": args.format as any,
-            "overrideExisting": args.override ?? false
-        });
-    }
+            return (args.format as ImageExtensions) || undefined;
+        })()
+    });
 })();

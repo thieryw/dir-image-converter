@@ -8,7 +8,8 @@
     },
     "bin": {
         "resize-images": "./dist/bin/resizeImages.js",
-        "convert-images": "./dist/bin/convertImages.js"
+        "convert-images": "./dist/bin/convertImages.js",
+        "format-images": "./dist/bin/formatImages.js"
     },
     "scripts": {
         "build": "tsc && yarn copyfiles",

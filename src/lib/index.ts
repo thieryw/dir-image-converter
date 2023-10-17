@@ -1,2 +1,2 @@
-export { generateResizedImages } from "./generateResizedImages";
+export { generateResizedImages } from "./generateFormatedImages";
 export { generateConvertedImages } from "./generateConvertedImages";

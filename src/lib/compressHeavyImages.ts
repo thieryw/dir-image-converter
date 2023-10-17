@@ -1,7 +1,7 @@
 import { getPathsOfImagesThatAreToHeavy } from "./getIPathsOfImagesThatAreToHeavy";
 import path from "path";
 import fs from "fs";
-import { compress } from "./compressImage";
+import { compressImage } from "./compressImage";
 
 async function compressHeavyImagesRec(params: {
     pathToAssets: string;
@@ -31,7 +31,7 @@ async function compressHeavyImagesRec(params: {
             return path.join(...splitPath);
         })();
         if (fs.existsSync(pathToImageDir))
-            await compress({
+            await compressImage({
                 "path": imagePath,
                 "outPath": path.join(pathToImageDir, tempImageName),
                 quality

@@ -3,7 +3,7 @@ import { isValidImage } from "../tools/isValidImage";
 import { imageExtensions } from "../tools/imageExtensions";
 import type { ImageExtensions } from "../tools/imageExtensions";
 
-export async function compress(params: { path: string; outPath: string; quality: number }) {
+export async function compressImage(params: { path: string; outPath: string; quality: number }) {
     const { outPath, path, quality } = params;
     const isImage = await isValidImage(path);
     if (!isImage) {
