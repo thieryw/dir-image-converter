@@ -6,7 +6,7 @@ function getImageSize(filePath: string) {
     try {
         return fs.statSync(filePath).size / 1024;
     } catch (err) {
-        console.log(`Error: ${err}`);
+        console.error(`Error: ${err}`);
     }
 }
 

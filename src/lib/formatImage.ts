@@ -80,7 +80,6 @@ export async function formatImage(params: FormatImageParams) {
     const sizeLabel = outputSizes[0].sizeLabel === undefined ? "" : `${outputSizes[0].sizeLabel}_`;
 
     const fileName = parse(file).name;
-    console.log(file);
     const newImagePath = join(
         pathToConvertedImages,
         `${sizeLabel}${fileName}.${convertedFormat ?? format}` ??
